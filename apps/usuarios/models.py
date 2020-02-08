@@ -8,8 +8,8 @@ from django.contrib.auth.hashers import make_password
 class User(AbstractUser):
     semestre = models.CharField(max_length=2, blank=True, null=True)
     grupo = models.CharField(max_length=2, blank=True, null=True)
-    created_at = models.DateTimeField(_("Fecha de creación"), auto_now_add=True)
-    updated_at = models.DateTimeField(_("Fecha de actualización"), auto_now=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
 
     #def save(self, request= False, *args, **kwargs):
     #    if not self.pk:
