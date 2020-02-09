@@ -30,7 +30,7 @@ class Solicitudes(models.Model):
     profesor = models.ForeignKey(Profesor, related_name='Profesor', on_delete=models.CASCADE)
     materia = models.ForeignKey(Materia, related_name='Materia', on_delete=models.CASCADE)
     meteriales = models.ManyToManyField(Materiales, related_name='materiales', verbose_name='materiales')
-    lugar = models.CharField(max_length=30, blank=True, null=True)
+    lugar = models.CharField(max_length=30, blank=True, null=True, choices=CHOICES_LUGAR)
     activo = models.BooleanField(default=True)
 
     def __str__ (self):
