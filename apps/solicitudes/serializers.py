@@ -7,7 +7,7 @@ from apps.materias.serializers import MateriasSerializers
 from apps.materiales.serializers import MaterialesSerializers
 
 class SolicitudesSerializers(Serializer):
-    usuario = UserSerializer(read_only=True)
+    usuario = UsersSerializers(read_only=True)
     profesor = ProfesoresSerializers(read_only=True)
     materias = MateriasSerializers(read_only=True)
     materiales = MaterialesSerializers(read_only=True)

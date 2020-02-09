@@ -1,10 +1,11 @@
 from django.urls import path
 
+from apps.solicitudes.views import add_solicitudes, delete_solicitudes, edit_solicitudes, lista_solicitudes, SolicitudesList
+
 urlpatterns = [
-    #path('solicitudes/crear/', ),
-    #path('solicitudes/<int:pk>/editar/', ),
-    #path('solicitudes/<int:pk>/eliminar/', ),
-    #path('solicitudes/listar/', ),
-    #path('solicitudes/generar/pdf/', ),
-    #path('api/solicitudes/listar/', ),
+    path('solicitudes/crear/', add_solicitudes, name='add_solicitudes'),
+    path('solicitudes/<int:pk>/editar/', edit_solicitudes, name='edit_solicitudes'),
+    path('solicitudes/<int:pk>/eliminar/', delete_solicitudes, name='delete_solicitudes'),
+    path('solicitudes/listar/', lista_solicitudes, name='lista_solicitudes'),
+    path('api/solicitudes/listar/', SolicitudesList.as_view()),
 ]

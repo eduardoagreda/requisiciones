@@ -49,7 +49,7 @@ class SolicitudesForm(forms.ModelForm):
         ),
     )
 
-    materiales = forms.ModelMultipleChoiceField(queryset=Materiales.objects.filter(estatus='Disponible'), label='Materiales')
+    materiales = forms.ModelMultipleChoiceField(queryset=Materiales.objects.all().filter(estatus='Disponible'), label='Materiales')
     class Meta:
         model = Solicitudes
         fields = ['usuario', 'fecha', 'hora_inico', 'hora_fin', 'profesor', 'materia', 'meteriales', 'lugar']
