@@ -12,7 +12,7 @@ from apps.materias.models import Materia
 
 # Create your views here.
 
-class MateriasList(APIView):
+class ListMateria(APIView):
     def get(self, request):
         materias = Materia.objects.all()
         if materias:

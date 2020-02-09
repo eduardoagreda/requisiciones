@@ -12,14 +12,21 @@ from apps.usuarios.serializers import UsersSerializers
 
 # Create your views here.
 
-class UsuariosList(APIView):
+class ListUsuarios(APIView):
     def get(self, request):
-        usuarios = User.objects.all().filter(is_staff=False)
+        usuarios = User.objects.all()
         if usuarios:
             serializer = UsersSerializers(usuarios, many=True)
             return Response(data=serializer.data, status=status.HTTP_200_OK)
         result = {'data': 'Error, no se encuentran datos en la base de datos.'}        
         return Response(result, status=status.HTTP_204_NO_CONTENT)
+
+    def post(self, request):        
+        serializer = UsersSerializer(data = request.data)
+        if serializer.is_valid():            
+            serializer.save()            
+            return Response(data=serializer.data, status= status.HTTP_201_CREATED)            
+        return Response(serializer.errors, status= status.HTTP_400_BAD_REQUEST)
 
 def add_usuarios(request):
     if request.method == 'POST':
@@ -54,5 +61,5 @@ def delete_usuarios(request, pk):
     #return render(request=request, template_name='')
 
 def lista_usuarios(request):
-    usuarios = User.objects.all().filter(is_staff=False)
+    usuarios = User.objects.filter(is_staff=False)
     #return render(request=request, template_name='', {'usuarios':usuarios})
