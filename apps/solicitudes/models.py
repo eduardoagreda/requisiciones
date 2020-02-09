@@ -26,7 +26,7 @@ class Solicitudes(models.Model):
     fecha = models.DateField(auto_now=False, auto_now_add=False)
     hora_inico = models.TimeField(auto_now=False, auto_now_add=False)
     hora_fin = models.TimeField(auto_now=False, auto_now_add=False)
-    estatus = models.CharField(max_length=30, blank=True, null=True, choices=CHOICES_ESTATUS)
+    estatus = models.CharField(max_length=30, blank=True, null=True, choices=CHOICES_ESTATUS, default='Reservada')
     profesor = models.ForeignKey(Profesor, related_name='Profesor', on_delete=models.CASCADE)
     materia = models.ForeignKey(Materia, related_name='Materia', on_delete=models.CASCADE)
     meteriales = models.ManyToManyField(Materiales, related_name='materiales', verbose_name='materiales')
