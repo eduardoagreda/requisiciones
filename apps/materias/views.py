@@ -1,6 +1,6 @@
 from django.shortcuts import render, get_object_or_404, redirect
 
-from django.http import JsonResponse
+from django.http import JsonResponse, Http404
 
 from rest_framework import status
 from rest_framework.views import APIView
@@ -13,11 +13,11 @@ from apps.materias.models import Materia
 # Create your views here.
 
 class ListMateria(APIView):
-    def get(self, request):
+    def get(self, request, format=None):
         materias = Materia.objects.all()
         if materias:
             serializer  = MateriasSerializers(materias, many=True)
-            return Response(data=serializer.data, status=status.HTTP_200_OK)
+            return Response(data=serializer.data, status=status.HTTP_200_OK,)
         result = {'data': 'Error, no se encuentran datos en la base de datos.'}        
         return Response(result, status=status.HTTP_204_NO_CONTENT)
 

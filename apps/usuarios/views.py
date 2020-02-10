@@ -13,19 +13,19 @@ from apps.usuarios.serializers import UsersSerializers
 # Create your views here.
 
 class ListUsuarios(APIView):
-    def get(self, request):
+    def get(self, request, format=None):
         usuarios = User.objects.all()
         if usuarios:
             serializer = UsersSerializers(usuarios, many=True)
-            return Response(data=serializer.data, status=status.HTTP_200_OK)
+            return Response(serializer.data, status=status.HTTP_200_OK)
         result = {'data': 'Error, no se encuentran datos en la base de datos.'}        
         return Response(result, status=status.HTTP_204_NO_CONTENT)
 
-    def post(self, request):        
+    def post(self, request, format=None):        
         serializer = UsersSerializer(data = request.data)
         if serializer.is_valid():            
             serializer.save()            
-            return Response(data=serializer.data, status= status.HTTP_201_CREATED)            
+            return Response(serializer.data, status= status.HTTP_201_CREATED)            
         return Response(serializer.errors, status= status.HTTP_400_BAD_REQUEST)
 
 def add_usuarios(request):
