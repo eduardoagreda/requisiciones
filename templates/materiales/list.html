@@ -1,0 +1,78 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block css %}
+  <!-- DataTables -->
+  <link rel="stylesheet" href="{% static 'dashboard/plugins/datatables-bs4/css/dataTables.bootstrap4.css' %}">
+{% endblock  %}
+
+{% block title %}
+    Lista de Materiales
+{% endblock  %}
+
+{% block subtitle %}
+    <h3>Lista de Materiales</h3>
+{% endblock %}
+
+{% block content %}
+  <div class="card">
+    <div class="card-header">
+      <h3 class="card-title">Lista de las salas</h3>
+    </div>
+    <!-- /.card-header -->
+    <div class="card-body">
+      <table id="meteriales" class="table table-bordered table-hover">
+        <thead>
+          <tr>
+            <th>Nombre</th>
+            <th>Descripción</th>
+            <th>Stock</th>
+            <th>Estatus</th>
+            <th>Acciones</th>
+          </tr>
+        </thead>
+        {% for material in materiales %}
+        <tbody>
+          <tr>
+            <td>{{ material.nombre }}</td>
+            <td>{{ material.descripcion }}</td>
+            <td>{{ material.stock }}</td>
+            <td>{{ material.estatus }}</td>
+            <td>
+              <a href="#"><button type="button" class="btn btn-info"><i class="fas fa-eye"></button></a></i>
+              <a href="#"><button type="button" class="btn btn-warning"><i class="far fa-edit"></button></a></i> 
+              <a href="#"><button type="button" class="btn btn-danger"><i class="fas fa-trash-alt"></button></a></i>
+            </td>
+          </tr>
+        </tbody>
+        {% endfor %}
+      </table>
+    </div>
+  </div>
+{% endblock  %}
+
+{% block js %}
+<script src="{% static 'dashboard/plugins/datatables/jquery.dataTables.js'%}"></script>
+<script src="{% static 'dashboard/plugins/datatables-bs4/js/dataTables.bootstrap4.js'%}"></script>
+<script>
+  $(function () {
+    $('#materiales').DataTable({
+      paging: true,
+      lengthChange: true,
+      searching: true,
+      ordering: true,
+      info: true,
+      autoWidth: false,
+      url: '/api/materiales/list/', 
+      type: 'GET'
+    });
+
+    $.ajax({
+      url : "/api/materiales/list/?format=json",
+      method : "GET",
+      success : function (data) {
+		  }
+    });
+  });
+</script>
+{% endblock  %}
