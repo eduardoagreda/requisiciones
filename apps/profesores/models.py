@@ -4,10 +4,10 @@ from django.db import models
 
 class Profesor(models.Model):
     CHOICES_GRADO = (
-        ('M.C.', 'Maestro en Ciencias'),
-        ('DR.', 'Doctor'),
-        ('CHEF.', 'CHEF'),
-        ('LIC.', 'Licenciado')
+        ('Lic.', 'Licenciado'),
+        ('Mtro.', 'Maestro'),
+        ('Mtra.', 'Maestra'),
+        ('Dr.', 'Doctor'),
     )
     nombre = models.CharField(max_length=20, blank=True, null=True)
     apellidos = models.CharField(max_length=50, blank=True, null=True)
