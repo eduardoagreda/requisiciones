@@ -4,7 +4,7 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>{% block title %} Sistema de Requisiciones UNICACH {% endblock  %}</title>
+  <title>{% block title %} Sistema de Requisiciones de Gastronomía {% endblock  %}</title>
   <!-- Tell the browser to be responsive to screen width -->
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <!-- Font Awesome -->
@@ -43,6 +43,14 @@
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
           <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
+          <li class="nav-item">
+            <a href="#" class="nav-link">
+              <i class="nav-icon fas fa-tachometer-alt"></i>
+                <p>
+                  Dashboard
+                </p>
+            </a>
+          </li>
           <li class="nav-item has-treeview">
             <a href="#" class="nav-link">
               <i class="nav-icon fas fa-utensils"></i>
@@ -135,6 +143,14 @@
               </li>
             </ul>
           </li>
+          <li class="nav-item">
+            <a href="#" class="nav-link">
+              <i class="nav-icon fas fa-sign-out-alt"></i>
+                <p>
+                  Cerrar Sesión
+                </p>
+            </a>
+          </li>
         </ul>
       </nav>
       <!-- /.sidebar-menu -->
@@ -150,7 +166,7 @@
         <div class="row mb-2">
           <div class="col-sm-6">
             {% block subtitle %}
-              <h1>Sistema de Requisiciones UNICACH</h1>
+              <h1>Sistema de Requisiciones de Gastronomía</h1>
             {% endblock  %}
           </div>
           <div class="col-sm-6">
