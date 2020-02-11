@@ -12,6 +12,9 @@ from apps.usuarios.serializers import UsersSerializers
 
 # Create your views here.
 
+def index(request):
+    return render(request=request, template_name='base.html')
+
 class ListUsuarios(APIView):
     def get(self, request, format=None):
         usuarios = User.objects.all()

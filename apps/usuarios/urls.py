@@ -1,8 +1,9 @@
 from django.urls import path
 
-from apps.usuarios.views import add_usuarios, edit_usuarios, delete_usuarios, lista_usuarios, ListUsuarios
+from apps.usuarios.views import add_usuarios, edit_usuarios, delete_usuarios, lista_usuarios, ListUsuarios, index
 
 urlpatterns = [
+    path('', index, name='index'),
     path('usuario/crear/', add_usuarios, name='add_usuarios'),
     path('usuario/<int:pk>/editar/', edit_usuarios, name='edit_usuarios'),
     path('usuario/<int:pk>/eliminar/', delete_usuarios, name='delete_usuarios' ),
