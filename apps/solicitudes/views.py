@@ -33,7 +33,7 @@ def add_solicitudes(request):
             return redirect('lista_solicitudes')
     else:
         solicitudes_form = SolicitudesForm()
-    #return render(request=request, template_name='', {'solicitudes':solicitudes_form})
+    return render(request, 'solicitudes/create.html', {'solicitudes':solicitudes_form})
 
 def edit_solicitudes(request, pk):
     solicitudes = get_object_or_404(Solicitudes, id=pk)
@@ -46,7 +46,7 @@ def edit_solicitudes(request, pk):
             return redirect('lista_solicitudes')
     else:
         solicitudes_form = SolicitudesForm(instance=solicitudes)
-    #return render (request=request, template_name='', {'solicitudes': solicitudes_form})
+    return render (request, 'solicitudes/update.html', {'solicitudes': solicitudes_form})
 
 def delete_solicitudes(request, pk):
     solicitudes = get_object_or_404(Solicitudes, id=pk)
@@ -55,8 +55,8 @@ def delete_solicitudes(request, pk):
         return redirect ('lista_solicitudes')
     elif request.method == 'POST' and 'cancel' in request.POST:
         return redirect('lista_solicitudes')
-    #return render(request=request, template_name='')
+    return render(request, 'solicitudes/delete.html')
 
 def lista_solicitudes(request):
     solicitudes = Solicitudes.objects.all()
-    #return render(request=request, template_name='', {'solicitudes':solicitudes})
+    return render(request, 'solicitudes/list.html', {'solicitudes':solicitudes})

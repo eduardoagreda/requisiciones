@@ -43,7 +43,7 @@ INSTALLED_APPS = [
     'apps.solicitudes',
     'apps.usuarios',
     'rest_framework',
-    'crispy_forms',
+    'widget_tweaks',
     'tempus_dominus',
 ]
 
@@ -85,8 +85,6 @@ WSGI_APPLICATION = 'cocina_unicach.wsgi.application'
 TEMPUS_DOMINUS_LOCALIZE = True
 
 TEMPUS_DOMINUS_INCLUDE_ASSETS = True
-
-CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
 # Database
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases

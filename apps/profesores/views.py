@@ -14,7 +14,7 @@ from apps.profesores.serializers import ProfesoresSerializers
 
 class ProfesoresList(APIView):
     def get(self, request):
-        profesores = Materia.objects.all()
+        profesores = Profesor.objects.all()
         if profesores:
             serializer  = ProfesoresSerializers(profesores, many=True)
             return Response(data=serializer.data, status=status.HTTP_200_OK)
@@ -30,10 +30,10 @@ def add_profesores(request):
             return redirect('lista_profesores')
     else:
         profesores_form = ProfesorForm()
-    #return render(request=request, template_name='', {'form':profesores_form})
+    return render(request, 'profesores/create.html', {'form':profesores_form})
 
 def edit_profesores(request, pk):
-    profesores = get_object_or_404(Materia, id=pk)
+    profesores = get_object_or_404(Profesor, id=pk)
     if request.method == 'POST':
         profesores_form =  ProfesorForm(data=request.POST, instance=profesores)
         if profesores_form.is_valid():
@@ -42,17 +42,17 @@ def edit_profesores(request, pk):
             return redirect('lista_profesores')
     else:
         profesores_form = ProfesorForm(instance=profesores)
-    #return render (request=request, template_name='', {'form': profesores_form})
+    return render (request, 'profesores/update.html', {'form': profesores_form})
 
 def delete_profesores(request, pk):
-    profesores = get_object_or_404(Materia, id=pk)
+    profesores = get_object_or_404(Profesor, id=pk)
     if request.method  == 'POST' and 'delete' in request.POST:
         profesores.delete()
         return redirect ('lista_profesores')
     elif request.method == 'POST' and 'cancel' in request.POST:
         return redirect('lista_profesores')
-    #return render(request=request, template_name='')
+    return render(request, 'profesores/delete.html')
 
 def lista_profesores(request):
-    profesores = Materia.objects.all()
-    #return render(request=request, template_name='', {'profesores':profesores})
+    profesores = Profesor.objects.all()
+    return render(request, 'profesores/list.html', {'profesores':profesores})

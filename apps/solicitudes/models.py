@@ -24,7 +24,7 @@ class Solicitudes(models.Model):
 
     usuario = models.ForeignKey(User, related_name='Usuario', on_delete=models.CASCADE)
     fecha = models.DateField(auto_now=False, auto_now_add=False)
-    hora_inico = models.TimeField(auto_now=False, auto_now_add=False)
+    hora_inicio = models.TimeField(auto_now=False, auto_now_add=False)
     hora_fin = models.TimeField(auto_now=False, auto_now_add=False)
     estatus = models.CharField(max_length=30, blank=True, null=True, choices=CHOICES_ESTATUS, default='Reservada')
     profesor = models.ForeignKey(Profesor, related_name='Profesor', on_delete=models.CASCADE)

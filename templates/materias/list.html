@@ -7,38 +7,34 @@
 {% endblock  %}
 
 {% block title %}
-    Lista de Materiales
+    Lista de Materias
 {% endblock  %}
 
 {% block subtitle %}
-    <h3>Lista de Materiales</h3>
+    <h3>Lista de Materias</h3>
 {% endblock %}
 
 {% block content %}
   <div class="card">
     <div class="col-12">
       <div class="card-header">
-        <h3 class="card-title">Lista de Materiales</h3>
+        <h3 class="card-title">Lista de Materias</h3>
       </div>
       <!-- /.card-header -->
       <div class="card-body">
-        <table id="tab-mate" class="table table-bordered table-hover">
+        <table id="mate" class="table table-bordered table-hover">
           <thead>
             <tr>
               <th>Nombre</th>
-              <th>Descripción</th>
-              <th>Stock</th>
-              <th>Estatus</th>
+              <th>Clave</th>
               <th>Acciones</th>
             </tr>
           </thead>
           <tbody>
-          {% for material in materiales %}
+          {% for materia in materias %}
             <tr>
-              <td>{{ material.nombre }}</td>
-              <td>{{ material.descripcion }}</td>
-              <td>{{ material.stock }}</td>
-              <td>{{ material.estatus }}</td>
+              <td>{{ materia.nombre }}</td>
+              <td>{{ materia.clave }}</td>
               <td>
                 <a href="#"><button type="button" class="btn btn-info"><i class="fas fa-eye"></button></a></i>
                 <a href="#"><button type="button" class="btn btn-warning"><i class="far fa-edit"></button></a></i> 
@@ -58,7 +54,7 @@
 <script src="{% static 'dashboard/plugins/datatables-bs4/js/dataTables.bootstrap4.js'%}"></script>
 <script>
   $(function () {
-    $('#tab-mate').DataTable({
+    $('#mate').DataTable({
       paging: true,
       lengthChange: true,
       searching: true,
@@ -66,8 +62,15 @@
       info: true,
       autoWidth: false,
       responsive: true,
-      url: '/api/materiales/listar/',
+      url: '/api/materias/listar/',
       type : 'GET'
+    });
+    
+    $.ajax({
+      url : "/api/materias/listar/?format=json",
+      method : "GET",
+      success : function (data) {
+		  }
     });
   });
 </script>

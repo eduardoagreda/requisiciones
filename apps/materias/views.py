@@ -30,7 +30,7 @@ def add_materias(request):
             return redirect('lista_materias')
     else:
         materias_form = MateriaForm()
-    #return render(request=request, template_name='', {'form':materias_form})
+    return render(request, 'materias/create.html', {'form':materias_form})
 
 def edit_materias(request, pk):
     materias = get_object_or_404(Materia, id=pk)
@@ -42,7 +42,7 @@ def edit_materias(request, pk):
             return redirect('lista_materias')
     else:
         materias_form = MateriaForm(instance=materias)
-    #return render (request=request, template_name='', {'form': materias_form})
+    return render (request, 'materias/update.html', {'form': materias_form})
 
 def delete_materias(request, pk):
     materias = get_object_or_404(Materia, id=pk)
@@ -51,8 +51,8 @@ def delete_materias(request, pk):
         return redirect ('lista_materias')
     elif request.method == 'POST' and 'cancel' in request.POST:
         return redirect('lista_materias')
-    #return render(request=request, template_name='')
+    return render(request, 'materias/delete.html')
 
 def lista_materias(request):
     materias = Materia.objects.all()
-    #return render(request=request, template_name='', {'materias':materias})
+    return render(request, 'materias/list.html', {'materias':materias})
