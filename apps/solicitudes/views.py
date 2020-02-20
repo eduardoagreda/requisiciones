@@ -8,7 +8,7 @@ from rest_framework.response import Response
 
 from django.contrib import messages 
 
-#from django.views.generic import CreateView, DeleteView, ListView, UpdateView
+from django.views.generic import DetailView
 
 from apps.solicitudes.models import Solicitudes
 from apps.solicitudes.forms import SolicitudesForm
@@ -67,3 +67,7 @@ def delete_solicitudes(request, pk):
 def lista_solicitudes(request):
     solicitudes = Solicitudes.objects.all()
     return render(request, 'solicitudes/list.html', {'solicitudes':solicitudes})
+
+class DetalleSolicitudes(DetailView):
+    model = Solicitudes
+    template_name = 'solicitudes/read.html'

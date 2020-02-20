@@ -34,4 +34,4 @@ class Solicitudes(models.Model):
     activo = models.BooleanField(default=True)
 
     def __str__ (self):
-        return str(self.profesor) + ' - ' + str(self.materia) + ' / ' + str(self.meteriales)
+        return str(self.profesor) + ' - ' + str(self.materia)

@@ -1,5 +1,7 @@
 from django.shortcuts import render, get_object_or_404, redirect
 
+from django.urls import reverse_lazy
+
 from django.http import JsonResponse
 
 from rest_framework import status
@@ -9,6 +11,8 @@ from rest_framework.response import Response
 from apps.profesores.models import Profesor
 from apps.profesores.forms import ProfesorForm
 from apps.profesores.serializers import ProfesoresSerializers
+
+from django.views.generic import DetailView, DeleteView
 
 # Create your views here.
 
@@ -46,13 +50,20 @@ def edit_profesores(request, pk):
 
 def delete_profesores(request, pk):
     profesores = get_object_or_404(Profesor, id=pk)
-    if request.method  == 'POST' and 'delete' in request.POST:
+    if request.method  == 'POST':
         profesores.delete()
         return redirect ('lista_profesores')
-    elif request.method == 'POST' and 'cancel' in request.POST:
-        return redirect('lista_profesores')
     return render(request, 'profesores/delete.html')
 
 def lista_profesores(request):
     profesores = Profesor.objects.all()
     return render(request, 'profesores/list.html', {'profesores':profesores})
+
+class DetalleProfesor(DetailView):
+    model = Profesor
+    template_name = 'profesores/read.html'
+
+class DeleteProfesor(DeleteView):
+    model = Profesor
+    template_name = 'profesores/delete.html'
+    success_url = reverse_lazy('lista_profesores')

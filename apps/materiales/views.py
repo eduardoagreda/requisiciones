@@ -10,6 +10,8 @@ from apps.materiales.models import Materiales
 from apps.materiales.forms import MaterialesForm
 from apps.materiales.serializers import MaterialesSerializers
 
+from django.views.generic import DetailView
+
 # Create your views here.
 
 class MaterialesList(APIView):
@@ -64,3 +66,7 @@ def delete_materiales(request, pk):
 def lista_materiales(request):
     mate = Materiales.objects.all()
     return render(request, 'materiales/list.html', {'materiales':mate})
+
+class DetalleMateriales(DetailView):
+    model = Materiales
+    template_name = 'materiales/read.html'
