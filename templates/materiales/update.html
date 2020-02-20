@@ -1,9 +1,9 @@
 {% extends 'base.html' %}
 {% load static %}
-{% load widget_tweaks  %}
+{% load crispy_forms_tags  %}
 
 {% block css %}
-  
+  {{ form.media }}
 {% endblock  %}
 
 {% block title %}
@@ -32,19 +32,15 @@
           <div class="form-group">
             <div class="row">
               <div class="col-md-6">
-                <label for="{{ form.nombre.id_for_label }}">{{ form.nombre.label }}</label>
-                {% render_field form.nombre class="form-control" %}
+                {{ form.nombre|as_crispy_field }}
               </div>
               <div class="col-md-6">
-                <label for="{{ form.stock.id_for_label }}">{{ form.stock.label}}</label>
-                {% render_field form.stock class="form-control" %}
+                {{ form.stock|as_crispy_field }}
               </div>
             </div>
             <div class="row">
               <div class="col-md-12">
-                <br>
-                <label for="{{ form.descripcion.id_for_label }}"> {{ form.descripcion.label }}</label>
-                {% render_field form.descripcion class="form-control"    %}
+                {{ form.descripcion|as_crispy_field }}
               </div>
             </div>
             <div class="card-footer">
