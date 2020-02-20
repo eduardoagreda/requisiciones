@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 {% load static %}
-{% load widget_tweaks  %}
+{% load crispy_forms_tags  %}
 
 {% block css %}
 {{ form.media }}
@@ -23,6 +23,13 @@
       <div class="card-header">
         <h3 class="card-title">Añadir Nueva Solicitud</h3>
       </div>
+      {% if messages %}
+      <div class="alert alert-danger" role="alert">
+        {% for message in messages %}
+          {% if message.tags %} {% endif %}{{ message }}
+        {% endfor %}
+      </div>
+      {% endif %}
       <!-- /.card-header -->
       
       <!-- form start -->
@@ -32,28 +39,21 @@
           <div class="form-group">
             <div class="row">
               <div class="col-md-4">
-                <label for="{{ form.fecha.id_for_label }}">{{ form.fecha.label }}</label>
-                {% render_field form.fecha class="form-control" %}
-                <label for="{{ form.profesor.id_for_label }}">{{ form.profesor.label }}</label>
-                {% render_field form.profesor class="form-control" %}
+                {{ form.fecha|as_crispy_field}}
+                {{ form.profesor|as_crispy_field}}
               </div>
               <div class="col-md-4">
-                <label for="{{ form.hora_inicio.id_for_label }}">{{ form.hora_inicio.label}}</label>
-                {% render_field form.hora_inicio class="form-control" %}
-                <label for="{{ form.materia.id_for_label }}">{{ form.materia.label }}</label>
-                {% render_field form.materia class="form-control" %}
+                {{ form.hora_inicio|as_crispy_field}}
+                {{ form.materia|as_crispy_field}}
               </div>
               <div class="col-md-4">
-                <label for="{{ form.hora_fin.id_for_label }}"> {{ form.hora_fin.label }}</label>
-                {% render_field form.hora_fin class="form-control"    %}
-                <label for="{{ form.lugar.id_for_label }}">{{ form.lugar.label }}</label>
-                {% render_field form.lugar class="form-control" %}
+                {{ form.hora_fin|as_crispy_field}}
+                {{ form.lugar|as_crispy_field}}
               </div>
             </div>
             <div class="row">
                 <div class="col-md-12">
-                    <label for="{{ form.materiales.id_for_label }}">{{ form.materiales.label }}</label>
-                    {% render_field form.materiales class="form-control" %}
+                  {{ form.materiales|as_crispy_field}}
                 </div>
             </div>
             <div class="card-footer">

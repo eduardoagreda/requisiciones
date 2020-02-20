@@ -6,6 +6,8 @@ from rest_framework import status
 from rest_framework.views import APIView
 from rest_framework.response import Response
 
+from django.contrib import messages 
+
 #from django.views.generic import CreateView, DeleteView, ListView, UpdateView
 
 from apps.solicitudes.models import Solicitudes
@@ -25,12 +27,16 @@ class SolicitudesList(APIView):
 
 def add_solicitudes(request):
     if request.method == 'POST':
-        solicitudes_form = SolicitudesForm(data=request.POST)
+        solicitudes_form = SolicitudesForm(request.POST)
         if solicitudes_form.is_valid():
             solicitudes = solicitudes_form.save(commit=False)
-            solicitudes.usuario = request.user
-            solicitudes.save()
-            solicitudes_form.save_m2m()
+            if solicitudes.hora_fin < solicitudes.hora_inicio:
+                messages.error(request, 'El horario no está bien asignado')
+                return render(request, 'solicitudes/create.html', {'form':solicitudes_form})
+            else:
+                solicitudes.usuario = request.user
+                solicitudes.save()
+                solicitudes_form.save_m2m()
             return redirect('lista_solicitudes')
     else:
         solicitudes_form = SolicitudesForm()
@@ -39,7 +45,7 @@ def add_solicitudes(request):
 def edit_solicitudes(request, pk):
     solicitudes = get_object_or_404(Solicitudes, id=pk)
     if request.method == 'POST':
-        solicitudes_form =  SolicitudesForm(data=request.POST, instance=solicitudes)
+        solicitudes_form =  SolicitudesForm(request.POST, instance=solicitudes)
         if solicitudes_form.is_valid():
             solicitudes = solicitudes_form.save(commit=False)
             solicitudes.save()
