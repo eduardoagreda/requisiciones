@@ -1,0 +1,77 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load widget_tweaks  %}
+
+{% block css %}
+{{ form.media }}
+{% endblock  %}
+
+{% block title %}
+    Añadir Nueva Solicitud
+{% endblock  %}
+
+{% block subtitle %}
+    <h3>Añadir Nueva Solicitud</h3>
+{% endblock %}
+
+{% block content %}
+<div class="row">
+  <!-- left column -->
+  <div class="col-md-12">
+    <!-- general form elements -->
+    <div class="card card-primary">
+      <div class="card-header">
+        <h3 class="card-title">Añadir Nueva Solicitud</h3>
+      </div>
+      <!-- /.card-header -->
+      
+      <!-- form start -->
+      <form role="form" method="POST">
+        {% csrf_token %}
+        <div class="card-body">
+          <div class="form-group">
+            <div class="row">
+              <div class="col-md-4">
+                <label for="{{ form.fecha.id_for_label }}">{{ form.fecha.label }}</label>
+                {% render_field form.fecha class="form-control" %}
+                <label for="{{ form.profesor.id_for_label }}">{{ form.profesor.label }}</label>
+                {% render_field form.profesor class="form-control" %}
+              </div>
+              <div class="col-md-4">
+                <label for="{{ form.hora_inicio.id_for_label }}">{{ form.hora_inicio.label}}</label>
+                {% render_field form.hora_inicio class="form-control" %}
+                <label for="{{ form.materia.id_for_label }}">{{ form.materia.label }}</label>
+                {% render_field form.materia class="form-control" %}
+              </div>
+              <div class="col-md-4">
+                <label for="{{ form.hora_fin.id_for_label }}"> {{ form.hora_fin.label }}</label>
+                {% render_field form.hora_fin class="form-control"    %}
+                <label for="{{ form.lugar.id_for_label }}">{{ form.lugar.label }}</label>
+                {% render_field form.lugar class="form-control" %}
+              </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <label for="{{ form.materiales.id_for_label }}">{{ form.materiales.label }}</label>
+                    {% render_field form.materiales class="form-control" %}
+                </div>
+            </div>
+            <div class="card-footer">
+              <div class="row">
+                <div class="col-12">
+                  <button type="submit" class="btn btn-primary">Añadir</button>
+                </div>
+                <!-- /.col -->
+              </div>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+  <!-- /.card -->
+  </div>
+</div>
+{% endblock  %}
+
+{% block js %}
+{% endblock  %}

@@ -1,0 +1,66 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load widget_tweaks  %}
+
+{% block css %}
+  
+{% endblock  %}
+
+{% block title %}
+    Añadir Nueva Materia
+{% endblock  %}
+
+{% block subtitle %}
+    <h3>Añadir Nueva Materia</h3>
+{% endblock %}
+
+{% block content %}
+<div class="row">
+  <!-- left column -->
+  <div class="col-md-12">
+    <!-- general form elements -->
+    <div class="card card-primary">
+      <div class="card-header">
+        <h3 class="card-title">Añadir Nueva Materia</h3>
+      </div>
+      <!-- /.card-header -->
+      
+      <!-- form start -->
+      <form role="form" method="POST">
+        {% csrf_token %}
+        <div class="card-body">
+          <div class="form-group">
+            <div class="row">
+              <div class="col-md-4">
+                <label for="{{ form.nombre.id_for_label }}">{{ form.nombre.label }}</label>
+                {% render_field form.nombre class="form-control" %}
+              </div>
+              <div class="col-md-4">
+                <label for="{{ form.clave.id_for_label }}">{{ form.clave.label}}</label>
+                {% render_field form.clave class="form-control" %}
+              </div>
+              <div class="col-md-4">
+                <label for="{{ form.creditos.id_for_label }}"> {{ form.creditos.label }}</label>
+                {% render_field form.creditos class="form-control"    %}
+                <br>
+              </div>
+            </div>
+            <div class="card-footer">
+              <div class="row">
+                <div class="col-12">
+                  <button type="submit" class="btn btn-primary">Añadir</button>
+                </div>
+                <!-- /.col -->
+              </div>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+  <!-- /.card -->
+  </div>
+</div>
+{% endblock  %}
+
+{% block js %}
+{% endblock  %}

@@ -28,12 +28,13 @@ def add_solicitudes(request):
         solicitudes_form = SolicitudesForm(data=request.POST)
         if solicitudes_form.is_valid():
             solicitudes = solicitudes_form.save(commit=False)
+            solicitudes.usuario = request.user
             solicitudes.save()
             solicitudes_form.save_m2m()
             return redirect('lista_solicitudes')
     else:
         solicitudes_form = SolicitudesForm()
-    return render(request, 'solicitudes/create.html', {'solicitudes':solicitudes_form})
+    return render(request, 'solicitudes/create.html', {'form':solicitudes_form})
 
 def edit_solicitudes(request, pk):
     solicitudes = get_object_or_404(Solicitudes, id=pk)
