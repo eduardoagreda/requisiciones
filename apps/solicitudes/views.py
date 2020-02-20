@@ -53,7 +53,7 @@ def edit_solicitudes(request, pk):
             return redirect('lista_solicitudes')
     else:
         solicitudes_form = SolicitudesForm(instance=solicitudes)
-    return render (request, 'solicitudes/update.html', {'solicitudes': solicitudes_form})
+    return render (request, 'solicitudes/update.html', {'form': solicitudes_form})
 
 def delete_solicitudes(request, pk):
     solicitudes = get_object_or_404(Solicitudes, id=pk)
