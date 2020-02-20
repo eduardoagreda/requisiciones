@@ -32,16 +32,13 @@
           <div class="form-group">
             <div class="row">
               <div class="col-md-4">
-                <label for="{{ form.nombre.id_for_label }}">{{ form.nombre.label }}</label>
-                {% render_field form.nombre class="form-control" %}
+                {{ form.nombre|as_crispy_field }}
               </div>
               <div class="col-md-4">
-                <label for="{{ form.clave.id_for_label }}">{{ form.clave.label}}</label>
-                {% render_field form.clave class="form-control" %}
+                {{ form.clave|as_crispy_field }}
               </div>
               <div class="col-md-4">
-                <label for="{{ form.creditos.id_for_label }}"> {{ form.creditos.label }}</label>
-                {% render_field form.creditos class="form-control"    %}
+                {{ form.creditos|as_crispy_field }}
                 <br>
               </div>
             </div>

@@ -32,17 +32,13 @@
           <div class="form-group">
             <div class="row">
               <div class="col-md-4">
-                <label for="{{ form.nombre.id_for_label }}">{{ form.nombre.label}}</label>
-                {% render_field form.nombre class="form-control" %}
+                {{ form.nombre|as_crispy_field }}
               </div>
               <div class="col-md-4">
-                <label for="{{ form.apellidos.id_for_label }}"> {{ form.apellidos.label }}</label>
-                {% render_field form.apellidos class="form-control"    %}
+                {{ form.apellidos|as_crispy_field }}
               </div>
               <div class="col-md-4">
-                <label for="{{ form.grado.id_for_label }}">{{ form.grado.label }}</label>
-                {% render_field form.grado class="form-control" %}
-                <br>
+                {{ form.grado|as_crispy_field }}
               </div>
             </div>
             <div class="card-footer">
