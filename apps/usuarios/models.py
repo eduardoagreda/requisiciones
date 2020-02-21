@@ -11,10 +11,10 @@ class User(AbstractUser):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
-    #def save(self, request= False, *args, **kwargs):
-    #    if not self.pk:
-    #       self.password = make_password(self.password)
-    #   super(User, self).save(*args, **kwargs)
+    def save(self, request= False, *args, **kwargs):
+        if not self.pk:
+           self.password = make_password(self.password)
+        super(User, self).save(*args, **kwargs)
 
     def __str__(self):
         return self.first_name + ' ' + self.last_name + ' ' + self.username 

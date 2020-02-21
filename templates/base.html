@@ -89,12 +89,14 @@
               </p>
             </a>
             <ul class="nav nav-treeview">
+            {% if perms.materiales.add_materiales %}
               <li class="nav-item">
                 <a href="{% url 'add_materiales' %}" class="nav-link">
                   <i class="fas fa-plus nav-icon"></i>
                   <p>Agregar</p>
                 </a>
               </li>
+              {% endif %}
               <li class="nav-item">
                 <a href="{% url 'lista_materiales' %}" class="nav-link">
                   <i class="fas fa-list nav-icon"></i>
@@ -103,6 +105,7 @@
               </li>
             </ul>
           </li>
+          {% if perms.materia.view_materia %}
           <li class="nav-item has-treeview">
             <a href="#" class="nav-link">
               <i class="nav-icon fas fa-book"></i>
@@ -126,6 +129,8 @@
               </li>
             </ul>
           </li>
+          {% endif %}
+          {% if perms.profesor.view_profesor %}
           <li class="nav-item has-treeview">
             <a href="#" class="nav-link">
               <i class="nav-icon fas fa-chalkboard-teacher"></i>
@@ -149,6 +154,7 @@
               </li>
             </ul>
           </li>
+          {% endif %}
           <li class="nav-item has-treeview">
             <a href="#" class="nav-link">
               <i class="nav-icon fas fa-clipboard"></i>
@@ -173,7 +179,7 @@
             </ul>
           </li>
           <li class="nav-item">
-            <a href="#" class="nav-link">
+            <a href="{% url 'logout' %}" class="nav-link">
               <i class="nav-icon fas fa-sign-out-alt"></i>
                 <p>
                   Cerrar Sesión

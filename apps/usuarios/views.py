@@ -12,8 +12,11 @@ from apps.usuarios.serializers import UsersSerializers
 
 # Create your views here.
 
+def dashboard(request):
+    return render(request=request, template_name='user/dashboard.html')
+
 def index(request):
-    return render(request=request, template_name='base.html')
+    return render(request=request, template_name='index/index.html')
 
 class ListUsuarios(APIView):
     def get(self, request, format=None):
