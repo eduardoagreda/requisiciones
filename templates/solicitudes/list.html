@@ -42,7 +42,7 @@
               <td>
                 <a onclick="return abrir_modal('{% url 'read_solicitudes' pk=solicitud.id %}')"><button type="button" class="btn btn-info"><i class="fas fa-eye"></button></a></i>
                 <a href="{% url 'edit_solicitudes' pk=solicitud.id %}"><button type="button" class="btn btn-warning"><i class="far fa-edit"></button></a></i> 
-                <a href="#"><button type="button" class="btn btn-danger"><i class="fas fa-trash-alt"></button></a></i>
+                <a onclick="return abrir_modal('{% url 'delete_solicitudes' pk=solicitud.id %}')"><button type="button" class="btn btn-danger"><i class="fas fa-trash-alt"></button></a></i>
               </td>
             </tr>
           {% endfor %}
@@ -51,7 +51,7 @@
       </div>
     </div>
   </div>
-  <div id="popup" class="modal" tabindex="-1" role="dialog">
+  <div id="popup" data-keyboard="false" data-backdrop="static" class="modal" tabindex="-1" role="dialog">
 
   </div>
 {% endblock  %}

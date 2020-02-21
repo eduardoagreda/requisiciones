@@ -8,15 +8,20 @@
     </div>
     <div class="modal-body">
       <div class="row">
-        <div class="col-lg-12">
+        <div class="col-lg-3">
           <label>ID</label>
+          <br>
           <p>{{ object.id }}</p>
-          <label>NOMBRE</label>
-          <p>{{ object.nombre }}</p>
-          <label>DESCRIPCION</label>
-          <p>{{ object.descripcion|safe }}</p>
           <label>ESTADO</label>
           <p>{{ object.estatus }}</p>
+        </div>
+        <div class="col-lg-6">
+          <label>DESCRIPCION</label>
+          {{ object.descripcion|safe }}
+          <label>NOMBRE</label>
+          <p>{{ object.nombre }}</p>
+        </div>      
+        <div class="col-lg-3">
           <label>STOCK</label>
           <p>{{ object.stock }}</p>
         </div>

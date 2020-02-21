@@ -2,13 +2,15 @@ from django.shortcuts import render, get_object_or_404, redirect
 
 from django.http import JsonResponse
 
+from django.urls import reverse_lazy
+
 from rest_framework import status
 from rest_framework.views import APIView
 from rest_framework.response import Response
 
 from django.contrib import messages 
 
-from django.views.generic import DetailView
+from django.views.generic import DetailView, DeleteView
 
 from apps.solicitudes.models import Solicitudes
 from apps.solicitudes.forms import SolicitudesForm
@@ -71,3 +73,8 @@ def lista_solicitudes(request):
 class DetalleSolicitudes(DetailView):
     model = Solicitudes
     template_name = 'solicitudes/read.html'
+
+class DeleteSolicitudes(DeleteView):
+    model = Solicitudes
+    template_name = 'solicitudes/delete.html'
+    success_url = reverse_lazy('lista_solicitudes')

@@ -2,6 +2,8 @@ from django.shortcuts import render, get_object_or_404, redirect
 
 from django.http import JsonResponse
 
+from django.urls import reverse_lazy
+
 from rest_framework import status
 from rest_framework.views import APIView
 from rest_framework.response import Response
@@ -10,7 +12,7 @@ from apps.materiales.models import Materiales
 from apps.materiales.forms import MaterialesForm
 from apps.materiales.serializers import MaterialesSerializers
 
-from django.views.generic import DetailView
+from django.views.generic import DetailView, DeleteView
 
 # Create your views here.
 
@@ -70,3 +72,8 @@ def lista_materiales(request):
 class DetalleMateriales(DetailView):
     model = Materiales
     template_name = 'materiales/read.html'
+
+class DeleteMateriales(DeleteView):
+    model = Materiales
+    template_name = 'materiales/delete.html'
+    success_url = reverse_lazy('lista_materiales')
