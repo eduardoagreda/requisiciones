@@ -63,7 +63,8 @@
           <img src="{% static 'media/imagenes/unicachlogo.png'%}" class="img-circle elevation-2" alt="User Image">
         </div>
         <div class="info">
-          <a class="d-block">{{ user.first_name }} {{ user.last_name }}</a>
+          <a class="d-block">{{ user.first_name }}</a>
+          <a class="d-block">{{ user.last_name }}</a>
         </div>
       </div>
 
@@ -73,7 +74,7 @@
           <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
           <li class="nav-item">
-            <a href="#" class="nav-link">
+            <a href="{% url 'login' %}" class="nav-link">
               <i class="nav-icon fas fa-tasks"></i>
                 <p>
                   Dashboard

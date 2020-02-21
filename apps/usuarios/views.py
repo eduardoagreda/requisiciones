@@ -18,6 +18,17 @@ def dashboard(request):
 def index(request):
     return render(request=request, template_name='index/index.html')
 
+def registration(request):
+    if request.method == 'POST':
+        usuarios_form = UserForm(data=request.POST)
+        if usuarios_form.is_valid():
+            usuarios = usuarios_form.save(commit=False)
+            usuarios.save()
+            return redirect('log')
+    else:
+        usuarios_form = UserForm()
+    return render(request, 'user/registration.html', {'form': usuarios_form})
+
 def log(request):
     return render(request=request, template_name='user/login.html')
 

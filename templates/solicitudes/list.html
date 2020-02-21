@@ -42,7 +42,9 @@
               <td>
                 <a onclick="return abrir_modal('{% url 'read_solicitudes' pk=solicitud.id %}')"><button type="button" class="btn btn-info"><i class="fas fa-eye"></button></a></i>
                 <a href="{% url 'edit_solicitudes' pk=solicitud.id %}"><button type="button" class="btn btn-warning"><i class="far fa-edit"></button></a></i> 
+                {% if perms.solicitudes.delete_solicitudes %}
                 <a onclick="return abrir_modal('{% url 'delete_solicitudes' pk=solicitud.id %}')"><button type="button" class="btn btn-danger"><i class="fas fa-trash-alt"></button></a></i>
+                {% endif %}
               </td>
             </tr>
           {% endfor %}
