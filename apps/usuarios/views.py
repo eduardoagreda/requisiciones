@@ -18,6 +18,9 @@ def dashboard(request):
 def index(request):
     return render(request=request, template_name='index/index.html')
 
+def log(request):
+    return render(request=request, template_name='user/login.html')
+
 class ListUsuarios(APIView):
     def get(self, request, format=None):
         usuarios = User.objects.all()
