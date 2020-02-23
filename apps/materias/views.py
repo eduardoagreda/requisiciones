@@ -4,6 +4,8 @@ from django.http import JsonResponse, Http404
 
 from django.urls import reverse_lazy
 
+from django.contrib.auth.decorators import login_required
+
 from rest_framework import status
 from rest_framework.views import APIView
 from rest_framework.response import Response
@@ -16,6 +18,7 @@ from django.views.generic import DetailView, DeleteView
 
 # Create your views here.
 
+@login_required
 class ListMateria(APIView):
     def get(self, request, format=None):
         materias = Materia.objects.all()
@@ -25,6 +28,7 @@ class ListMateria(APIView):
         result = {'data': 'Error, no se encuentran datos en la base de datos.'}        
         return Response(result, status=status.HTTP_204_NO_CONTENT)
 
+@login_required
 def add_materias(request):
     if request.method == 'POST':
         materias_form = MateriaForm(data=request.POST)
@@ -36,6 +40,7 @@ def add_materias(request):
         materias_form = MateriaForm()
     return render(request, 'materias/create.html', {'form':materias_form})
 
+@login_required
 def edit_materias(request, pk):
     materias = get_object_or_404(Materia, id=pk)
     if request.method == 'POST':
@@ -48,6 +53,7 @@ def edit_materias(request, pk):
         materias_form = MateriaForm(instance=materias)
     return render (request, 'materias/update.html', {'form': materias_form})
 
+@login_required
 def delete_materias(request, pk):
     materias = get_object_or_404(Materia, id=pk)
     if request.method  == 'POST' and 'delete' in request.POST:
@@ -57,14 +63,17 @@ def delete_materias(request, pk):
         return redirect('lista_materias')
     return render(request, 'materias/delete.html')
 
+@login_required
 def lista_materias(request):
     materias = Materia.objects.all()
     return render(request, 'materias/list.html', {'materias':materias})
 
+@login_required
 class DetalleMateria(DetailView):
     model = Materia
     template_name = 'materias/read.html'
 
+@login_required
 class DeleteMateria(DeleteView):
     model = Materia
     template_name = 'materias/delete.html'

@@ -2,6 +2,8 @@ from django.shortcuts import render, get_object_or_404, redirect
 
 from django.urls import reverse_lazy
 
+from django.contrib.auth.decorators import login_required
+
 from django.http import JsonResponse
 
 from rest_framework import status
@@ -15,7 +17,7 @@ from apps.profesores.serializers import ProfesoresSerializers
 from django.views.generic import DetailView, DeleteView
 
 # Create your views here.
-
+@login_required
 class ProfesoresList(APIView):
     def get(self, request):
         profesores = Profesor.objects.all()
@@ -25,6 +27,7 @@ class ProfesoresList(APIView):
         result = {'data': 'Error, no se encuentran datos en la base de datos.'}        
         return Response(result, status=status.HTTP_204_NO_CONTENT)
 
+@login_required
 def add_profesores(request):
     if request.method == 'POST':
         profesores_form = ProfesorForm(data=request.POST)
@@ -36,6 +39,7 @@ def add_profesores(request):
         profesores_form = ProfesorForm()
     return render(request, 'profesores/create.html', {'form':profesores_form})
 
+@login_required
 def edit_profesores(request, pk):
     profesores = get_object_or_404(Profesor, id=pk)
     if request.method == 'POST':
@@ -48,6 +52,7 @@ def edit_profesores(request, pk):
         profesores_form = ProfesorForm(instance=profesores)
     return render (request, 'profesores/update.html', {'form': profesores_form})
 
+@login_required
 def delete_profesores(request, pk):
     profesores = get_object_or_404(Profesor, id=pk)
     if request.method  == 'POST':
@@ -55,14 +60,17 @@ def delete_profesores(request, pk):
         return redirect ('lista_profesores')
     return render(request, 'profesores/delete.html')
 
+@login_required
 def lista_profesores(request):
     profesores = Profesor.objects.all()
     return render(request, 'profesores/list.html', {'profesores':profesores})
 
+@login_required
 class DetalleProfesor(DetailView):
     model = Profesor
     template_name = 'profesores/read.html'
 
+@login_required
 class DeleteProfesor(DeleteView):
     model = Profesor
     template_name = 'profesores/delete.html'

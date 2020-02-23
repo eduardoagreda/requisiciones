@@ -1,5 +1,7 @@
 from django.shortcuts import render, get_object_or_404, redirect
 
+from django.contrib.auth.decorators import login_required
+
 from django.http import JsonResponse
 
 from django.urls import reverse_lazy
@@ -18,6 +20,7 @@ from apps.solicitudes.serializers import SolicitudesSerializers
 
 # Create your views here.
 
+@login_required
 class SolicitudesList(APIView):
     def get(self, request):
         solicitudes = Solicitudes.objects.all()
@@ -27,6 +30,7 @@ class SolicitudesList(APIView):
         result = {'data': 'Error, no se encuentran datos en la base de datos.'}        
         return Response(result, status=status.HTTP_204_NO_CONTENT)
 
+@login_required
 def add_solicitudes(request):
     if request.method == 'POST':
         solicitudes_form = SolicitudesForm(request.POST)
@@ -44,6 +48,7 @@ def add_solicitudes(request):
         solicitudes_form = SolicitudesForm()
     return render(request, 'solicitudes/create.html', {'form':solicitudes_form})
 
+@login_required
 def edit_solicitudes(request, pk):
     solicitudes = get_object_or_404(Solicitudes, id=pk)
     if request.method == 'POST':
@@ -57,6 +62,7 @@ def edit_solicitudes(request, pk):
         solicitudes_form = SolicitudesForm(instance=solicitudes)
     return render (request, 'solicitudes/update.html', {'form': solicitudes_form})
 
+@login_required
 def delete_solicitudes(request, pk):
     solicitudes = get_object_or_404(Solicitudes, id=pk)
     if request.method  == 'POST' and 'delete' in request.POST:
@@ -66,14 +72,17 @@ def delete_solicitudes(request, pk):
         return redirect('lista_solicitudes')
     return render(request, 'solicitudes/delete.html')
 
+@login_required
 def lista_solicitudes(request):
     solicitudes = Solicitudes.objects.all()
     return render(request, 'solicitudes/list.html', {'solicitudes':solicitudes})
 
+@login_required
 class DetalleSolicitudes(DetailView):
     model = Solicitudes
     template_name = 'solicitudes/read.html'
 
+@login_required
 class DeleteSolicitudes(DeleteView):
     model = Solicitudes
     template_name = 'solicitudes/delete.html'
