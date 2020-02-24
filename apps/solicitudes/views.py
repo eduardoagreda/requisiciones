@@ -74,7 +74,10 @@ def delete_solicitudes(request, pk):
 
 @login_required
 def lista_solicitudes(request):
-    solicitudes = Solicitudes.objects.all()
+    if request.user.is_staff:
+        solicitudes = Solicitudes.objects.all()
+    else:
+        solicitudes = Solicitudes.objects.all().filter(usuario=request.user)
     return render(request, 'solicitudes/list.html', {'solicitudes':solicitudes})
 
 @login_required

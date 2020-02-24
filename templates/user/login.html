@@ -55,14 +55,18 @@
 							Login
 						</button>
 					</div>
-          <div class="text-center p-t-40">
-						<a class="txt1" href="#">
-							Forgot Password?
-						</a>
-            <a class="txt1" href="{% url 'registration' %}">
-							Crear cuenta
-						</a>
-					</div>
+          <div class="row p-t-40">
+            <div class="col-md-6">
+              <a class="txt1" href="#">
+                ¿Olvidaste tu contrseña?
+              </a>
+            </div>
+            <div class="col-md-6">
+              <a class="txt1" href="{% url 'register' %}">
+                Crear cuenta
+              </a>
+            </div>
+          </div>
 				</form>
 			</div>
 		</div>

@@ -18,7 +18,7 @@ def dashboard(request):
 def index(request):
     return render(request=request, template_name='index/index.html')
 
-def registration(request):
+def register(request):
     if request.method == 'POST':
         usuarios_form = UserForm(data=request.POST)
         if usuarios_form.is_valid():
