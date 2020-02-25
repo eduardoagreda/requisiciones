@@ -17,7 +17,6 @@ from apps.profesores.serializers import ProfesoresSerializers
 from django.views.generic import DetailView, DeleteView
 
 # Create your views here.
-@login_required
 class ProfesoresList(APIView):
     def get(self, request):
         profesores = Profesor.objects.all()
@@ -65,12 +64,10 @@ def lista_profesores(request):
     profesores = Profesor.objects.all()
     return render(request, 'profesores/list.html', {'profesores':profesores})
 
-@login_required
 class DetalleProfesor(DetailView):
     model = Profesor
     template_name = 'profesores/read.html'
 
-@login_required
 class DeleteProfesor(DeleteView):
     model = Profesor
     template_name = 'profesores/delete.html'

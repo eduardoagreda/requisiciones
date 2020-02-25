@@ -29,6 +29,10 @@
           {% if message.tags %} {% endif %}{{ message }}
         {% endfor %}
       </div>
+      {% else %}
+      <div class="alert alert-warning" role="alert">
+        <h6> Nota: Actualizar la hora de inicio y fin al cambiar los estados de las solicitudes.</h6>
+      </div>
       {% endif %}
       <!-- /.card-header -->
       
@@ -37,6 +41,20 @@
         {% csrf_token %}
         <div class="card-body">
           <div class="form-group">
+            <div class="row">
+              <div class="col-md-3">
+                {{ form.fecha|as_crispy_field}}
+              </div>
+              <div class="col-md-3">
+                {{ form.hora_inicio|as_crispy_field}}
+              </div>
+              <div class="col-md-3">
+                {{ form.hora_fin|as_crispy_field}}
+              </div>
+              <div class="col-md-3">
+                {{ form.estatus|as_crispy_field}}
+              </div>
+            </div>
             <div class="row">
               <div class="col-md-4">
                 {{ form.profesor|as_crispy_field}}

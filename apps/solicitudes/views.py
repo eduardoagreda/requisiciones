@@ -6,6 +6,8 @@ from django.http import JsonResponse
 
 from django.urls import reverse_lazy
 
+from django.core.mail import send_mail, EmailMultiAlternatives
+
 from rest_framework import status
 from rest_framework.views import APIView
 from rest_framework.response import Response
@@ -13,6 +15,8 @@ from rest_framework.response import Response
 from django.contrib import messages 
 
 from django.views.generic import DetailView, DeleteView
+
+from apps.materiales.models import Materiales
 
 from apps.solicitudes.models import Solicitudes
 from apps.solicitudes.forms import SolicitudesForm
@@ -32,21 +36,31 @@ class SolicitudesList(APIView):
 
 @login_required
 def add_solicitudes(request):
+    materiales = Materiales.objects.all()
     if request.method == 'POST':
         solicitudes_form = SolicitudesForm(request.POST)
         if solicitudes_form.is_valid():
             solicitudes = solicitudes_form.save(commit=False)
             if solicitudes.hora_fin < solicitudes.hora_inicio:
                 messages.error(request, 'El horario no está bien asignado')
-                return render(request, 'solicitudes/create.html', {'form':solicitudes_form})
+                return render(request, 'solicitudes/create.html', {'form':solicitudes_form, 'materiales': materiales})
             else:
                 solicitudes.usuario = request.user
+                print(solicitudes)
                 solicitudes.save()
                 solicitudes_form.save_m2m()
+                content = "<p>El usuario  " + '<strong>' +solicitudes.usuario.first_name +" "+ solicitudes.usuario.last_name + "</strong>  ha solicitado la requisición de materiales número: <strong>" + str(solicitudes.id) + "</strong>, el día: <strong>" + str(solicitudes.fecha) + "</strong> para la materia de <strong>" + str(solicitudes.materia) + "</strong> que impartirá el docente: <strong>" + solicitudes.profesor.nombre + ' ' + solicitudes.profesor.apellidos + "</strong>; la cual se llevará acabo en la cocina: <strong>" + solicitudes.lugar + "</strong> con hora de inicio a las: <strong>" + str(solicitudes.hora_inicio) + "</strong>  y finalizara a las: <strong>" + str(solicitudes.hora_fin) + "</strong>.<br>El estado de la video conferencia es: <strong>" + solicitudes.estatus + '</strong>.</p>'
+                mailto = EmailMultiAlternatives(subject='Requisición número: ' + str(solicitudes.id), 
+                    body='', from_email=None,
+                    to=[solicitudes.usuario.email, 'beeve3108@gmai.com']
+                )
+                mailto.attach_alternative(content=content, mimetype='text/html')
+                mailto.send()
             return redirect('lista_solicitudes')
     else:
         solicitudes_form = SolicitudesForm()
-    return render(request, 'solicitudes/create.html', {'form':solicitudes_form})
+        return render(request, 'solicitudes/create.html', {'form':solicitudes_form, 'materiales': materiales})
+    return render(request, 'solicitudes/create.html', {'form':solicitudes_form, 'materiales': materiales})
 
 @login_required
 def edit_solicitudes(request, pk):
@@ -55,6 +69,26 @@ def edit_solicitudes(request, pk):
         solicitudes_form =  SolicitudesForm(request.POST, instance=solicitudes)
         if solicitudes_form.is_valid():
             solicitudes = solicitudes_form.save(commit=False)
+            if solicitudes.hora_fin < solicitudes.hora_inicio:
+                messages.error(request, 'El horario no está bien asignado')
+                return render(request, 'solicitudes/create.html', {'form':solicitudes_form})
+            if solicitudes.estatus == 'Aceptada':
+                content = "<p>El usuario  " + '<strong>' +solicitudes.usuario.first_name +" "+ solicitudes.usuario.last_name + "</strong>  ha solicitado la requisición de materiales número: <strong>" + str(solicitudes.id) + "</strong>, el día: <strong>" + str(solicitudes.fecha) + "</strong> para la materia de <strong>" + str(solicitudes.materia) + "</strong> que impartirá el docente: <strong>" + solicitudes.profesor.nombre + ' ' + solicitudes.profesor.apellidos + "</strong>; la cual se llevará acabo en la cocina: <strong>" + solicitudes.lugar + "</strong> con hora de inicio a las: <strong>" + str(solicitudes.hora_inicio) + "</strong>  y finalizara a las: <strong>" + str(solicitudes.hora_fin) + "</strong>.<br>El estado de la video conferencia es: <strong>" + solicitudes.estatus + '</strong>.</p>'
+                mailto = EmailMultiAlternatives(subject='Requisición número: ' + str(solicitudes.id), 
+                    body='', from_email=None,
+                    to=[solicitudes.usuario.email, 'beeve3108@gmai.com']
+                )
+                mailto.attach_alternative(content=content, mimetype='text/html')
+                mailto.send()
+            elif solicitudes.estatus == 'Rechazada':
+                solicitudes.activo = True
+                content = "<p>El usuario  " + '<strong>' +solicitudes.usuario.first_name +" "+ solicitudes.usuario.last_name + "</strong>  ha solicitado la requisición de materiales número: <strong>" + str(solicitudes.id) + "</strong>, el día: <strong>" + str(solicitudes.fecha) + "</strong> para la materia de <strong>" + str(solicitudes.materia) + "</strong> que impartirá el docente: <strong>" + solicitudes.profesor.nombre + ' ' + solicitudes.profesor.apellidos + "</strong>; la cual se llevará acabo en la cocina: <strong>" + solicitudes.lugar + "</strong> con hora de inicio a las: <strong>" + str(solicitudes.hora_inicio) + "</strong>  y finalizara a las: <strong>" + str(solicitudes.hora_fin) + "</strong>.<br>El estado de la video conferencia es: <strong>" + solicitudes.estatus + '</strong>.</p>'
+                mailto = EmailMultiAlternatives(subject='Requisición número: ' + str(solicitudes.id), 
+                    body='', from_email=None,
+                    to=[solicitudes.usuario.email, 'beeve3108@gmai.com']
+                )
+                mailto.attach_alternative(content=content, mimetype='text/html')
+                mailto.send()
             solicitudes.save()
             solicitudes_form.save_m2m()
             return redirect('lista_solicitudes')
@@ -80,12 +114,10 @@ def lista_solicitudes(request):
         solicitudes = Solicitudes.objects.all().filter(usuario=request.user)
     return render(request, 'solicitudes/list.html', {'solicitudes':solicitudes})
 
-@login_required
 class DetalleSolicitudes(DetailView):
     model = Solicitudes
     template_name = 'solicitudes/read.html'
 
-@login_required
 class DeleteSolicitudes(DeleteView):
     model = Solicitudes
     template_name = 'solicitudes/delete.html'

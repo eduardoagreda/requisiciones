@@ -37,7 +37,7 @@
         <div class="col-lg-12">
             <label>MATERIALES</label>
             {% for t in object.materiales.all %}
-                <p>{{ t.materiales.all }}</p>
+                <p>{{ t.materiales.all|safeseq }}</p>
             {% endfor %}
         </div>
       </div>

@@ -88,6 +88,14 @@ TEMPUS_DOMINUS_INCLUDE_ASSETS = True
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
+# Gmail SMTP Server
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_HOST_USER = 'unicachlaboratorios@gmail.com'
+EMAIL_HOST_PASSWORD = 'Unicachlaboratorios01'
+EMAIL_USE_TLS = True
+DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
+
 # Database
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
 

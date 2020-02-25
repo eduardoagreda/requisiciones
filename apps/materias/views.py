@@ -17,8 +17,6 @@ from apps.materias.models import Materia
 from django.views.generic import DetailView, DeleteView
 
 # Create your views here.
-
-@login_required
 class ListMateria(APIView):
     def get(self, request, format=None):
         materias = Materia.objects.all()
@@ -68,12 +66,10 @@ def lista_materias(request):
     materias = Materia.objects.all()
     return render(request, 'materias/list.html', {'materias':materias})
 
-@login_required
 class DetalleMateria(DetailView):
     model = Materia
     template_name = 'materias/read.html'
 
-@login_required
 class DeleteMateria(DeleteView):
     model = Materia
     template_name = 'materias/delete.html'
