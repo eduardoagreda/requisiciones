@@ -51,9 +51,11 @@
               <div class="col-md-3">
                 {{ form.hora_fin|as_crispy_field}}
               </div>
+              {% if perms.solicitudes.add_solicitudes %}
               <div class="col-md-3">
                 {{ form.estatus|as_crispy_field}}
               </div>
+              {% endif %}
             </div>
             <div class="row">
               <div class="col-md-4">

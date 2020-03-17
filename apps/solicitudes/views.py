@@ -49,10 +49,10 @@ def add_solicitudes(request):
                 print(solicitudes)
                 solicitudes.save()
                 solicitudes_form.save_m2m()
-                content = "<p>El usuario  " + '<strong>' +solicitudes.usuario.first_name +" "+ solicitudes.usuario.last_name + "</strong>  ha solicitado la requisición de materiales número: <strong>" + str(solicitudes.id) + "</strong>, el día: <strong>" + str(solicitudes.fecha) + "</strong> para la materia de <strong>" + str(solicitudes.materia) + "</strong> que impartirá el docente: <strong>" + solicitudes.profesor.nombre + ' ' + solicitudes.profesor.apellidos + "</strong>; la cual se llevará acabo en la cocina: <strong>" + solicitudes.lugar + "</strong> con hora de inicio a las: <strong>" + str(solicitudes.hora_inicio) + "</strong>  y finalizara a las: <strong>" + str(solicitudes.hora_fin) + "</strong>.<br>El estado de la video conferencia es: <strong>" + solicitudes.estatus + '</strong>.</p>'
+                content = "<p>El usuario  " + '<strong>' +solicitudes.usuario.first_name +" "+ solicitudes.usuario.last_name + "</strong>  ha solicitado la requisición de materiales número: <strong>" + str(solicitudes.id) + "</strong>, el día: <strong>" + str(solicitudes.fecha) + "</strong> para la materia de <strong>" + str(solicitudes.materia) + "</strong> que impartirá el docente: <strong>" + solicitudes.profesor.nombre + ' ' + solicitudes.profesor.apellidos + "</strong>; la cual se llevará acabo en la cocina: <strong>" + solicitudes.lugar + "</strong> con hora de inicio a las: <strong>" + str(solicitudes.hora_inicio) + "</strong>  y finalizara a las: <strong>" + str(solicitudes.hora_fin) + "</strong>.<br>El estado de la requisición es: <strong>" + solicitudes.estatus + '</strong>.</p>'
                 mailto = EmailMultiAlternatives(subject='Requisición número: ' + str(solicitudes.id), 
                     body='', from_email=None,
-                    to=[solicitudes.usuario.email, 'beeve3108@gmai.com']
+                    to=[solicitudes.usuario.email, 'beeve3108@gmail.com']
                 )
                 mailto.attach_alternative(content=content, mimetype='text/html')
                 mailto.send()
@@ -73,19 +73,19 @@ def edit_solicitudes(request, pk):
                 messages.error(request, 'El horario no está bien asignado')
                 return render(request, 'solicitudes/create.html', {'form':solicitudes_form})
             if solicitudes.estatus == 'Aceptada':
-                content = "<p>El usuario  " + '<strong>' +solicitudes.usuario.first_name +" "+ solicitudes.usuario.last_name + "</strong>  ha solicitado la requisición de materiales número: <strong>" + str(solicitudes.id) + "</strong>, el día: <strong>" + str(solicitudes.fecha) + "</strong> para la materia de <strong>" + str(solicitudes.materia) + "</strong> que impartirá el docente: <strong>" + solicitudes.profesor.nombre + ' ' + solicitudes.profesor.apellidos + "</strong>; la cual se llevará acabo en la cocina: <strong>" + solicitudes.lugar + "</strong> con hora de inicio a las: <strong>" + str(solicitudes.hora_inicio) + "</strong>  y finalizara a las: <strong>" + str(solicitudes.hora_fin) + "</strong>.<br>El estado de la video conferencia es: <strong>" + solicitudes.estatus + '</strong>.</p>'
+                content = "<p>El usuario  " + '<strong>' +solicitudes.usuario.first_name +" "+ solicitudes.usuario.last_name + "</strong>  ha solicitado la requisición de materiales número: <strong>" + str(solicitudes.id) + "</strong>, el día: <strong>" + str(solicitudes.fecha) + "</strong> para la materia de <strong>" + str(solicitudes.materia) + "</strong> que impartirá el docente: <strong>" + solicitudes.profesor.nombre + ' ' + solicitudes.profesor.apellidos + "</strong>; la cual se llevará acabo en la cocina: <strong>" + solicitudes.lugar + "</strong> con hora de inicio a las: <strong>" + str(solicitudes.hora_inicio) + "</strong>  y finalizara a las: <strong>" + str(solicitudes.hora_fin) + "</strong>.<br>El estado de la requisición es: <strong>" + solicitudes.estatus + '</strong>.</p>'
                 mailto = EmailMultiAlternatives(subject='Requisición número: ' + str(solicitudes.id), 
                     body='', from_email=None,
-                    to=[solicitudes.usuario.email, 'beeve3108@gmai.com']
+                    to=[solicitudes.usuario.email, 'beeve3108@gmail.com']
                 )
                 mailto.attach_alternative(content=content, mimetype='text/html')
                 mailto.send()
             elif solicitudes.estatus == 'Rechazada':
                 solicitudes.activo = True
-                content = "<p>El usuario  " + '<strong>' +solicitudes.usuario.first_name +" "+ solicitudes.usuario.last_name + "</strong>  ha solicitado la requisición de materiales número: <strong>" + str(solicitudes.id) + "</strong>, el día: <strong>" + str(solicitudes.fecha) + "</strong> para la materia de <strong>" + str(solicitudes.materia) + "</strong> que impartirá el docente: <strong>" + solicitudes.profesor.nombre + ' ' + solicitudes.profesor.apellidos + "</strong>; la cual se llevará acabo en la cocina: <strong>" + solicitudes.lugar + "</strong> con hora de inicio a las: <strong>" + str(solicitudes.hora_inicio) + "</strong>  y finalizara a las: <strong>" + str(solicitudes.hora_fin) + "</strong>.<br>El estado de la video conferencia es: <strong>" + solicitudes.estatus + '</strong>.</p>'
+                content = "<p>El usuario  " + '<strong>' +solicitudes.usuario.first_name +" "+ solicitudes.usuario.last_name + "</strong>  ha solicitado la requisición de materiales número: <strong>" + str(solicitudes.id) + "</strong>, el día: <strong>" + str(solicitudes.fecha) + "</strong> para la materia de <strong>" + str(solicitudes.materia) + "</strong> que impartirá el docente: <strong>" + solicitudes.profesor.nombre + ' ' + solicitudes.profesor.apellidos + "</strong>; la cual se llevará acabo en la cocina: <strong>" + solicitudes.lugar + "</strong> con hora de inicio a las: <strong>" + str(solicitudes.hora_inicio) + "</strong>  y finalizara a las: <strong>" + str(solicitudes.hora_fin) + "</strong>.<br>El estado de la requisición es: <strong>" + solicitudes.estatus + '</strong>.</p>'
                 mailto = EmailMultiAlternatives(subject='Requisición número: ' + str(solicitudes.id), 
                     body='', from_email=None,
-                    to=[solicitudes.usuario.email, 'beeve3108@gmai.com']
+                    to=[solicitudes.usuario.email, 'beeve3108@gmail.com']
                 )
                 mailto.attach_alternative(content=content, mimetype='text/html')
                 mailto.send()
