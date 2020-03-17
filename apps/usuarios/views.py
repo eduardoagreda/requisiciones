@@ -37,12 +37,12 @@ class ListUsuarios(APIView):
         usuarios = User.objects.all()
         if usuarios:
             serializer = UsersSerializers(usuarios, many=True)
-            return Response(serializer.data, status=status.HTTP_200_OK)
+            return Response(data=serializer.data, status=status.HTTP_200_OK)
         result = {'data': 'Error, no se encuentran datos en la base de datos.'}        
         return Response(result, status=status.HTTP_204_NO_CONTENT)
 
     def post(self, request, format=None):        
-        serializer = UsersSerializer(data = request.data)
+        serializer = UsersSerializers(data = request.data)
         if serializer.is_valid():            
             serializer.save()            
             return Response(serializer.data, status= status.HTTP_201_CREATED)            

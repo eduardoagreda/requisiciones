@@ -1,8 +1,8 @@
-from rest_framework.serializers import Serializer
+from rest_framework.serializers import ModelSerializer
 
 from apps.materias.models import Materia
 
-class MateriasSerializers(Serializer):
+class MateriasSerializers(ModelSerializer):
     class Meta:
         model = Materia
         fields = ('__all__')
