@@ -37,7 +37,7 @@ class ListUsuarios(APIView):
         usuarios = User.objects.all()
         if usuarios:
             serializer = UsersSerializers(usuarios, many=True)
-            return Response(data=serializer.data, status=status.HTTP_200_OK)
+            return Response(data={'usuarios':serializer.data}, status=status.HTTP_200_OK)
         result = {'data': 'Error, no se encuentran datos en la base de datos.'}        
         return Response(result, status=status.HTTP_204_NO_CONTENT)
 
@@ -45,8 +45,8 @@ class ListUsuarios(APIView):
         serializer = UsersSerializers(data = request.data)
         if serializer.is_valid():            
             serializer.save()            
-            return Response(serializer.data, status= status.HTTP_201_CREATED)            
-        return Response(serializer.errors, status= status.HTTP_400_BAD_REQUEST)
+            return Response({'usuarios':serializer.data}, status= status.HTTP_201_CREATED)            
+        return Response({'usuarios':serializer.errors}, status= status.HTTP_400_BAD_REQUEST)
 
 def add_usuarios(request):
     if request.method == 'POST':

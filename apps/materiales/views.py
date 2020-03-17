@@ -22,7 +22,7 @@ class MaterialesList(APIView):
         materiales = Materiales.objects.all()
         if materiales:
             serializer  = MaterialesSerializers(materiales, many=True)
-            return Response(serializer.data, status=status.HTTP_200_OK)
+            return Response({'materiales':serializer.data}, status=status.HTTP_200_OK)
         result = {'data': 'Error, no se encuentran datos en la base de datos.'}        
         return Response(result, status=status.HTTP_204_NO_CONTENT)
 

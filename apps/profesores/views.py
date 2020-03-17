@@ -22,7 +22,7 @@ class ProfesoresList(APIView):
         profesores = Profesor.objects.all()
         if profesores:
             serializer  = ProfesoresSerializers(profesores, many=True)
-            return Response(data=serializer.data, status=status.HTTP_200_OK)
+            return Response(data={'profesores':serializer.data}, status=status.HTTP_200_OK)
         result = {'data': 'Error, no se encuentran datos en la base de datos.'}        
         return Response(result, status=status.HTTP_204_NO_CONTENT)
 
