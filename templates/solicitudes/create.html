@@ -33,7 +33,7 @@
       {% endif %}
       <!-- /.card-header -->
       
-      <!-- form start 
+      <!-- form start -->
       <form role="form" method="POST">
         {% csrf_token %}
         <div class="card-body">
@@ -57,6 +57,7 @@
                 {{ form.materiales|as_crispy_field}}
               </div>
             </div>
+            <!--
             <br>
             <div class="row">
               <div class="col-md-12">
@@ -77,19 +78,20 @@
                       </tr>
                     {% endfor %}
                   </tbody>
-                </table>
+                </table>-->
               </div>
             </div>
             <div class="card-footer">
               <div class="row">
                 <div class="col-12">
                   <button type="submit" class="btn btn-primary">Añadir</button>
-                </div>                
+                </div>
+                <!-- /.col -->
               </div>
             </div>
           </div>
         </div>
-      </form>-->
+      </form>
     </div>
   <!-- /.card -->
   </div>
