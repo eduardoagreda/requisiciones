@@ -89,25 +89,29 @@ TEMPUS_DOMINUS_INCLUDE_ASSETS = True
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
 # Gmail SMTP Server
-EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_PORT = 587
-EMAIL_HOST_USER = 'unicachlaboratorios@gmail.com'
-EMAIL_HOST_PASSWORD = 'Unicachlaboratorios01'
-EMAIL_USE_TLS = True
-DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
+# EMAIL_HOST = 'smtp.gmail.com'
+# EMAIL_PORT = 587
+# EMAIL_HOST_USER = 'unicachlaboratorios@gmail.com'
+# EMAIL_HOST_PASSWORD = 'Unicachlaboratorios01'
+# EMAIL_USE_TLS = True
+# DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
 
 # Database
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'inventario',
-        'USER': 'root',
-        'PASSWORD': '',
-        'HOST': '127.0.0.1',
-        'PORT': '3306',
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
     }
+    # 'default': {
+    #     'ENGINE': 'django.db.backends.mysql',
+    #     'NAME': 'inventario',
+    #     'USER': 'root',
+    #     'PASSWORD': '',
+    #     'HOST': '127.0.0.1',
+    #     'PORT': '3306',
+    # }
 }
 
 
@@ -157,3 +161,5 @@ LOGIN_REDIRECT_URL= reverse_lazy('login')
 
 LOGOUT_URL = reverse_lazy('login')
 LOGOUT_REDIRECT_URL= reverse_lazy('login')
+
+DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
